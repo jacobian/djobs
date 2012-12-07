@@ -25,13 +25,7 @@ STATICFILES_DIRS = [PROJECT_ROOT.child('assets')]
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
 )
-
-# Compressor
-COMPRESS_ENABLED = True
-COMPRESS_CSS_FILTERS = ['compressor.filters.template.TemplateFilter']
-COMPRESS_JS_FILTERS = ['compressor.filters.template.TemplateFilter']
 
 # Templates
 TEMPLATE_DIRS = [PROJECT_ROOT.child('templates')]
@@ -55,7 +49,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'compressor',
     'django_forms_bootstrap',
     'south',
     'jobs',

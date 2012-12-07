@@ -2,15 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% load compress %}
   <meta charset="utf-8">
   <title>{% block title %}Django Jobs{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  {% compress css %}
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}jobs.css" rel="stylesheet">
-  {% endcompress %}
+  {% load static %}
+  <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+  <link href="{% static "bootstrap/css/bootstrap-responsive.css" %}" rel="stylesheet">
+  <link href="{% static "jobs.css" %}" rel="stylesheet">
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
