@@ -32,7 +32,10 @@ class MyListings(LoginRequiredMixin, JobList):
     template_name = "jobs/mine.html"
 
     def get_queryset(self):
-        return self.request.user.employer.listings.all()
+        try:
+            return self.request.user.employer.listings.all()
+        except Employer.DoesNotExist:
+            return JobListing.objects.none()
 
 class JobDetail(JobQuerysetMixin, DetailView):
     """
