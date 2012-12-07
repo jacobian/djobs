@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% load url from future %}
+  {% for job in jobs %}
+    <div class="job">
+      {% include "jobs/snippets/title.html" %}
+      <p>{{ job.description|truncatewords:"100" }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}

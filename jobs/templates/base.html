@@ -1,0 +1,44 @@
+{% load url from future %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load compress %}
+  <meta charset="utf-8">
+  <title>{% block title %}Django Jobs{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% compress css %}
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}jobs.css" rel="stylesheet">
+  {% endcompress %}
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  {% block extrahead %}{% endblock %}
+</head>
+<body>
+  <div class="container-narrow">
+    <div class="masthead">
+      <ul class="nav nav-pills pull-right">
+        <li><a href="/">All listings</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url "job_list_mine" %}">My listings</a></li>
+        {% endif %}
+        <li><a href="{% url "job_create" %}">New listing</a></li>
+      </ul>
+      <h4 class="muted">Jobs for Djangonauts</h4>
+    </div>
+
+    {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="row-fluid">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+</body>
+</html>
+</html>

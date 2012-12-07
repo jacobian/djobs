@@ -1,0 +1,27 @@
+.container-narrow {
+    margin: 0 auto;
+    max-width: 700px;
+}
+
+.masthead {
+    padding: 12px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px #ccc solid;
+}
+
+.masthead ul.nav {
+    margin-top: 3px;
+}
+
+.job {
+    padding: 4px 0 4px 8px;
+    margin-bottom: 8px;
+}
+
+.job:nth-child(2n) {
+    background-color: #eee;
+}
+
+.action-well form {
+    margin-bottom: 0;
+}

@@ -1,0 +1,12 @@
+{% load url from future %}
+<h3><a href="{% url "job_detail" job.id %}">{{ job.title }}</a> at
+  {% if job.employer.company_website %}<a href="{{ job.employer.company_website }}">{% endif %}
+  {{ job.employer.company_name }}
+  {% if job.employer.company_website %}</a>{% endif %}
+  <small>{{ job.created|timesince }} ago</small>
+  {% if job.status == 'draft' or job.status == 'archived' %}
+    <span class="label">{{ job.status|title }}</span>
+  {% elif job.status == 'removed' %}
+    <span class="label label-important">Removed</span>
+  {% endif %}
+</h3>

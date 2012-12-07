@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% load markup %}
+  {% load url from future %}
+
+  {% include "jobs/snippets/title.html" %}
+
+  {% if user_can_edit %}
+    <div class="well action-well">
+      {% if job.status == 'draft' %}
+        <p>This listing is a draft and has not yet been published. You can:</p>
+        <form class="form-inline" method="post" action="{% url "job_publish" job.id %}">
+          {% csrf_token %}
+          <a class="btn" href="{% url "job_edit" job.id %}">Edit it</a>
+          <button class="btn btn-primary">Publish it</button>
+        </form>
+      {% elif job.status == 'active' %}
+        <p>This listing is active. You can:</p>
+        <form class="form-inline" method="post" action="{% url "job_archive" job.id %}">
+          {% csrf_token %}
+          <a class="btn" href="{% url "job_edit" job.id %}">Edit it</a>
+          <button class="btn btn-primary">Archive it</button>
+        </form>
+      {% elif job.status == 'archived' %}
+        <p>You archived this listing, so it's no longer publically visable. You can:</p>
+        <form class="form-inline" method="post" action="{% url "job_publish" job.id %}">
+          {% csrf_token %}
+          <a class="btn" href="{% url "job_edit" job.id %}">Edit it</a>
+          <button class="btn btn-primary">Re-publish it</button>
+        </form>
+      {% elif job.status == 'removed' %}
+        <p class="text-error">This listing was removed for violating the site's guidlines.</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {{ job.description|markdown:"safe" }}
+
+  <p>Contact: <a href="mailto:{{ job.employer.email }}">{{ job.employer.name }}</a></p>
+  <p>Location: {{ job.location }} ({{ job.remote|yesno:"remote OK,on-site only" }})</p>
+  {% if job.compensation %}<p>Compensation: {{ job.compensation }}</p>{% endif %}
+
+{% endblock %}
