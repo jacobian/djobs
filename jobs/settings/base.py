@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django_forms_bootstrap',
     'south',
+    'social_auth',
     'jobs',
 ]
 
@@ -72,3 +73,21 @@ LOGGING = {
         },
     }
 }
+
+# Auth stuff
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    #'social_auth.backends.facebook.FacebookBackend',
+    #'social_auth.backends.contrib.linkedin.LinkedinBackend',
+    #'social_auth.backends.contrib.github.GithubBackend',
+    #'social_auth.backends.OpenIDBackend',
+    #'django.contrib.auth.backends.ModelBackend',
+)
+
+TWITTER_CONSUMER_KEY = os.environ["TWITTER_CONSUMER_KEY"]
+TWITTER_CONSUMER_SECRET = os.environ["TWITTER_CONSUMER_SECRET"]
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_COMPLETE_URL_NAME = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'

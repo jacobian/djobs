@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.core import urlresolvers
 from django.db.models import Q
-from django.views.generic import View, ListView, DetailView, CreateView, UpdateView
+from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView
 from django.shortcuts import get_object_or_404, redirect
 from braces.views import LoginRequiredMixin
 from .models import Employer, JobListing
@@ -107,3 +107,6 @@ class PublishJob(ChangeJobStatus):
 class ArchiveJob(ChangeJobStatus):
     new_status = JobListing.STATUS_ARCHIVED
     success_message = "Your job listing has been archived and is no longer public."
+
+class Login(TemplateView):
+    template_name = "login.html"

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% load url from future %}
+  <h3>Sign in</h3>
+  <ul class="thumbnails">
+    <li class="span4">
+      <a href="{% url "socialauth_begin" "twitter" %}">
+        <img src="http://placehold.it/300x200&amp;text=Twitter" alt="Sign in with Twitter">
+      </a>
+    </li>
+  </ul>
+{% endblock %}
