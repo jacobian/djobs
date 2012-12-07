@@ -7,5 +7,7 @@
       {% include "jobs/snippets/title.html" %}
       <p>{{ job.description|truncatewords:"100" }}</p>
     </div>
+  {% empty %}
+    {% block nojobs %}{% endblock %}
   {% endfor %}
 {% endblock %}

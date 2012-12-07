@@ -81,7 +81,7 @@ AUTHENTICATION_BACKENDS = (
     #'social_auth.backends.contrib.linkedin.LinkedinBackend',
     #'social_auth.backends.contrib.github.GithubBackend',
     #'social_auth.backends.OpenIDBackend',
-    #'django.contrib.auth.backends.ModelBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 TWITTER_CONSUMER_KEY = os.environ["TWITTER_CONSUMER_KEY"]

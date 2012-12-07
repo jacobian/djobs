@@ -1,1 +1,8 @@
 {% extends "jobs/index.html" %}
+
+{% block nojobs %}
+  {% load url from future %}
+  <div class="well">
+    <h4>You have no job listings. Why not <a href="{% url "job_create" %}">create one</a>?</h4>
+  </div>
+{% endblock %}
