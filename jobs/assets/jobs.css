@@ -32,6 +32,10 @@
     margin-bottom: 16px;
 }
 
+.row-signin form {
+    margin: 0;
+}
+
 .openid-form .input-append {
   text-align: center;
 }

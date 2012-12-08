@@ -69,12 +69,14 @@
     </div>
   </div>
   <div class="row row-signin openid-form">
-    <form method="post" action="{% url "socialauth_begin" "openid" %}">
-      {% csrf_token %}
-      <div class="input-append">
-        <input type="text" class="input-xlarge" name="openid_identifier"/>
-        <button class="btn btn-large" type="submit">Sign in with OpenID</button>
-      </div>
-    </form>
+    <div class="span12">
+      <form method="post" action="{% url "socialauth_begin" "openid" %}">
+        {% csrf_token %}
+        <div class="input-append">
+          <input type="text" class="input-xlarge" name="openid_identifier" placeholder="http://example.com/openid">
+          <button class="btn btn-large" type="submit">Sign in with OpenID</button>
+        </div>
+      </form>
+    </div>
   </div>
 {% endblock %}
