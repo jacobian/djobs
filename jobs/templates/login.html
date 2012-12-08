@@ -55,6 +55,7 @@
   <div class="row row-signin">
     <div class="span6">
       <form method="post" action="{% url "socialauth_complete" "browserid" %}">
+        {% csrf_token %}
         <input type="hidden" name="assertion" value="" />
         <a rel="nofollow" id="browserid" href="#" class="btn btn-large btn-block">
           Sign in with Mozilla Persona
@@ -66,5 +67,14 @@
         Sign in with Facebook
       </a>
     </div>
+  </div>
+  <div class="row row-signin openid-form">
+    <form method="post" action="{% url "socialauth_begin" "openid" %}">
+      {% csrf_token %}
+      <div class="input-append">
+        <input type="text" class="input-xlarge" name="openid_identifier"/>
+        <button class="btn btn-large" type="submit">Sign in with OpenID</button>
+      </div>
+    </form>
   </div>
 {% endblock %}
