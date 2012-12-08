@@ -2,25 +2,28 @@
 
 {% block content %}
   {% load url from future %}
-  <h3>Sign in</h3>
-  <ul class="thumbnails">
-    <li class="span4">
-      <div class="thumbnail">
-        <h4>
-          <a href="{% url "socialauth_begin" "twitter" %}">
-            Sign in with Twitter
-          </a>
-        </h4>
-      </div>
-    </li>
-    <li class="span4">
-      <div class="thumbnail">
-        <h4>
-          <a href="{% url "socialauth_begin" "github" %}">
-            Sign in with Github
-          </a>
-        </h4>
-      </div>
-    </li>
-  </ul>
+  <div class="row row-signin">
+    <div class="span6">
+      <a class="btn btn-large btn-block" href="{% url "socialauth_begin" "github" %}">
+        Sign in with Github
+      </a>
+    </div>
+    <div class="span6">
+      <a class="btn btn-large btn-block"href="{% url "socialauth_begin" "twitter" %}">
+        Sign in with Twitter
+      </a>
+    </div>
+  </div>
+  <div class="row row-signin">
+    <div class="span6">
+      <a class="btn btn-large btn-block" href="{% url "socialauth_begin" "facebook" %}">
+        Sign in with Facebook
+      </a>
+    </div>
+    <div class="span6">
+      <a class="btn btn-large btn-block" href="{% url "socialauth_begin" "linkedin" %}">
+        Sign in with LinkedIn
+      </a>
+    </div>
+  </div>
 {% endblock %}

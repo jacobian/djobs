@@ -25,3 +25,9 @@
 .action-well form {
     margin-bottom: 0;
 }
+
+.row-signin {
+    margin: 0 auto;
+    max-width: 700px;
+    margin-bottom: 16px;
+}
