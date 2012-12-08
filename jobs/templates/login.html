@@ -1,5 +1,31 @@
 {% extends "base.html" %}
 
+{% block extrahead %}
+  {{ block.super }}
+  <script src="https://login.persona.org/include.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript">
+  $(function () {
+      $('#browserid').click(function (e) {
+          e.preventDefault();
+          var self = $(this);
+
+          navigator.id.get(function (assertion) {
+              if (assertion) {
+                  self.closest('form')
+                          .find('input[type=hidden]')
+                              .attr('value', assertion)
+                              .end()
+                          .submit();
+              } else {
+                  alert('We are terribly sorry to inform you that the login failed.');
+              }
+          });
+      });
+  });
+  </script>
+{% endblock %}
+
 {% block content %}
   {% load url from future %}
   <div class="row row-signin">
@@ -9,20 +35,35 @@
       </a>
     </div>
     <div class="span6">
-      <a class="btn btn-large btn-block"href="{% url "socialauth_begin" "twitter" %}">
-        Sign in with Twitter
+      <a class="btn btn-large btn-block" href="{% url "socialauth_begin" "bitbucket" %}">
+        Sign in with Bitbucket
       </a>
     </div>
   </div>
   <div class="row row-signin">
     <div class="span6">
-      <a class="btn btn-large btn-block" href="{% url "socialauth_begin" "facebook" %}">
-        Sign in with Facebook
+      <a class="btn btn-large btn-block" href="{% url "socialauth_begin" "twitter" %}">
+        Sign in with Twitter
       </a>
     </div>
     <div class="span6">
       <a class="btn btn-large btn-block" href="{% url "socialauth_begin" "linkedin" %}">
         Sign in with LinkedIn
+      </a>
+    </div>
+  </div>
+  <div class="row row-signin">
+    <div class="span6">
+      <form method="post" action="{% url "socialauth_complete" "browserid" %}">
+        <input type="hidden" name="assertion" value="" />
+        <a rel="nofollow" id="browserid" href="#" class="btn btn-large btn-block">
+          Sign in with Mozilla Persona
+        </a>
+      </form>
+    </div>
+    <div class="span6">
+      <a class="btn btn-large btn-block" href="{% url "socialauth_begin" "facebook" %}">
+        Sign in with Facebook
       </a>
     </div>
   </div>

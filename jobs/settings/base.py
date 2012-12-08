@@ -78,14 +78,18 @@ LOGGING = {
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.contrib.github.GithubBackend',
+    'social_auth.backends.contrib.bitbucket.BitbucketBackend',
     'social_auth.backends.facebook.FacebookBackend',
     'social_auth.backends.contrib.linkedin.LinkedinBackend',
     'social_auth.backends.OpenIDBackend',
+    'social_auth.backends.browserid.BrowserIDBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-TWITTER_CONSUMER_KEY = os.environ.get("TWITTER_CONSUMER_KEY", '')
-TWITTER_CONSUMER_SECRET = os.environ.get("TWITTER_CONSUMER_SECRET", '')
+TWITTER_CONSUMER_KEY = os.environ.get('TWITTER_CONSUMER_KEY', '')
+TWITTER_CONSUMER_SECRET = os.environ.get('TWITTER_CONSUMER_SECRET', '')
+BITBUCKET_CONSUMER_KEY = os.environ.get('BITBUCKET_CONSUMER_KEY', '')
+BITBUCKET_CONSUMER_SECRET = os.environ.get('BITBUCKET_CONSUMER_SECRET', '')
 GITHUB_APP_ID = os.environ.get('GITHUB_APP_ID', '')
 GITHUB_API_SECRET = os.environ.get('GITHUB_API_SECRET', '')
 FACEBOOK_APP_ID = os.environ.get('FACEBOOK_APP_ID', '')
