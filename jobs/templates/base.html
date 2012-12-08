@@ -21,12 +21,10 @@
         <li><a href="/">All listings</a></li>
         {% if user.is_authenticated %}
           <li><a href="{% url "job_list_mine" %}">My listings</a></li>
-        {% endif %}
-        <li><a href="{% url "job_create" %}">New listing</a></li>
-        {% if user.is_authenticated %}
+          <li><a href="{% url "job_create" %}">New listing</a></li>
           <li><a href="{% url "logout" %}">Sign out</a></li>
         {% else %}
-          <li><a href="{% url "login" %}">Sign in</a></li>
+          <li><a href="{% url "login" %}">Sign in to list a job</a></li>
         {% endif %}
       </ul>
       <h4 class="muted">Jobs for Djangonauts</h4>

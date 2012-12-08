@@ -37,7 +37,7 @@
 
   {{ job.description|markdown:"safe" }}
 
-  <p>Contact: <a href="mailto:{{ job.employer.email }}">{{ job.employer.name }}</a></p>
+  <p>Contact: <a href="mailto:{{ job.contact_email }}">{{ job.contact_name }}</a></p>
   <p>Location: {{ job.location }} ({{ job.remote|yesno:"remote OK,on-site only" }})</p>
   {% if job.compensation %}<p>Compensation: {{ job.compensation }}</p>{% endif %}
 
