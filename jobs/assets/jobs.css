@@ -4,13 +4,22 @@
 }
 
 .masthead {
-    padding: 12px 0;
+    padding: 12px 0 0 0;
     margin-bottom: 20px;
     border-bottom: 1px #ccc solid;
 }
 
-.masthead ul.nav {
+.masthead h1 {
+    font-size: 18px;
+    color: #ccc;
+    width: 200px;
+    margin: 0;
+    float: left;
+}
+
+.masthead .nav {
     margin-top: 3px;
+    float: right;
 }
 
 .job {
@@ -43,4 +52,14 @@
 .openid-form input {
   font-size: 17.5px;
   height: 34px;
+}
+
+/* layout tweaks for smaller screens */
+@media (max-width: 767px) {
+    .row-signin {
+        margin-bottom: 0;
+    }
+    .row-signin div {
+        margin-bottom: 16px;
+    }
 }
