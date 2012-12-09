@@ -16,6 +16,13 @@
     margin: 0;
     float: left;
 }
+.masthead a {
+    color: inherit;
+    text-decoration: none;
+}
+.masthead a:hover {
+    color: #08c;
+}
 
 .masthead .nav {
     margin-top: 3px;
