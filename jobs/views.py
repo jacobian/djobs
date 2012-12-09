@@ -24,12 +24,14 @@ class JobList(JobQuerysetMixin, ListView):
     model = JobListing
     template_name = "jobs/index.html"
     context_object_name = 'jobs'
+    navitem = "all"
 
 class MyListings(LoginRequiredMixin, JobList):
     """
     "My listings" page.
     """
     template_name = "jobs/mine.html"
+    navitem = "mine"
 
     def get_queryset(self):
         return self.request.user.job_listings.all()
@@ -71,6 +73,7 @@ class JobCreate(LoginRequiredMixin, JobEditMixin, CreateView):
     """
     template_name = "jobs/create.html"
     success_message = "Your job listing has been saved as a draft."
+    navitem = "new"
 
     def get_form_kwargs(self):
         kwargs = super(JobCreate, self).get_form_kwargs()
@@ -110,3 +113,4 @@ class ArchiveJob(ChangeJobStatus):
 
 class Login(TemplateView):
     template_name = "login.html"
+    navitem = "login"

@@ -19,13 +19,21 @@
     <div class="masthead clearfix">
       <h1>Jobs for Djangonauts</h1>
       <ul class="nav nav-pills">
-        <li><a href="/">All listings</a></li>
+        <li {% if view.navitem == 'all' %}class="active"{% endif %}>
+          <a href="/">All listings</a>
+        </li>
         {% if user.is_authenticated %}
-          <li><a href="{% url "job_list_mine" %}">My listings</a></li>
-          <li><a href="{% url "job_create" %}">New listing</a></li>
+          <li {% if view.navitem == 'mine' %}class="active"{% endif %}>
+            <a href="{% url "job_list_mine" %}">My listings</a>
+          </li>
+          <li {% if view.navitem == 'new' %}class="active"{% endif %}>
+            <a href="{% url "job_create" %}">New listing</a>
+          </li>
           <li><a href="{% url "logout" %}">Sign out</a></li>
         {% else %}
-          <li><a href="{% url "login" %}">Sign in to list a job</a></li>
+          <li {% if view.navitem == 'login' %}class="active"{% endif %}>
+            <a href="{% url "login" %}">Sign in to list a job</a>
+          </li>
         {% endif %}
       </ul>
     </div>
