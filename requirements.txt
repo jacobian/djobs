@@ -6,7 +6,6 @@ django-heroku-postgresify==0.2
 django-secure==0.1.2
 django-social-auth==0.7.10
 django-storages==1.1.4
-Django==1.4.2
 gevent==0.13.8
 greenlet==0.4.0
 gunicorn==0.14.3
@@ -19,3 +18,6 @@ python-openid==2.2.5
 pytz==2012h
 South==0.7.6
 Unipath==0.2.1
+
+# Django 1.5 beta
+https://www.djangoproject.com/download/1.5b1/tarball/
