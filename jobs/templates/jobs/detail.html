@@ -4,30 +4,28 @@
   {% load markup mailhide %}
   {% load url from future %}
 
-  {% include "jobs/snippets/title.html" %}
-
   {% if user_can_edit %}
-    <div class="well action-well">
+    <div class="well action-well pull-right">
       {% if job.status == 'draft' %}
-        <p>This listing is a draft and has not yet been published. You can:</p>
+        <p>This listing is a draft and has not yet been published.</p>
         <form class="form-inline" method="post" action="{% url "job_publish" job.id %}">
           {% csrf_token %}
-          <a class="btn" href="{% url "job_edit" job.id %}">Edit it</a>
-          <button class="btn btn-primary">Publish it</button>
+          <a class="btn btn-block" href="{% url "job_edit" job.id %}">Edit</a>
+          <button class="btn btn-block btn-primary">Publish</button>
         </form>
       {% elif job.status == 'active' %}
-        <p>This listing is active. You can:</p>
+        <p>This listing is active.</p>
         <form class="form-inline" method="post" action="{% url "job_archive" job.id %}">
           {% csrf_token %}
-          <a class="btn" href="{% url "job_edit" job.id %}">Edit it</a>
-          <button class="btn btn-primary">Archive it</button>
+          <a class="btn btn-block" href="{% url "job_edit" job.id %}">Edit</a>
+          <button class="btn btn-block btn-primary">Archive</button>
         </form>
       {% elif job.status == 'archived' %}
-        <p>You archived this listing, so it's no longer publically visable. You can:</p>
+        <p>You archived this listing, so it's no longer publically visable.</p>
         <form class="form-inline" method="post" action="{% url "job_publish" job.id %}">
           {% csrf_token %}
-          <a class="btn" href="{% url "job_edit" job.id %}">Edit it</a>
-          <button class="btn btn-primary">Re-publish it</button>
+          <a class="btn btn-block" href="{% url "job_edit" job.id %}">Edit</a>
+          <button class="btn btn-block btn-primary">Re-publish</button>
         </form>
       {% elif job.status == 'removed' %}
         <p class="text-error">This listing was removed for violating the site's guidlines.</p>
@@ -35,6 +33,7 @@
     </div>
   {% endif %}
 
+  {% include "jobs/snippets/title.html" %}
   {{ job.description|markdown:"safe" }}
 
   <p>Contact: <a href="{{ job.contact_email|mailhide }}" onclick="window.open('{{ job.contact_email|mailhide }}', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">{{ job.contact_name }}</a></p>

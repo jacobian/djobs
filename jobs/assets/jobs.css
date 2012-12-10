@@ -38,8 +38,19 @@
     border-top: 1px #ccc solid;
 }
 
+.action-well {
+    width: 200px;
+    margin: 0 0 20px 20px;
+}
+
 .action-well form {
     margin-bottom: 0;
+}
+
+.action-well .btn-block {
+    width: 45%;
+    float: left;
+    margin: 0 5px 0 0;
 }
 
 .row-signin {
