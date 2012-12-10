@@ -101,3 +101,7 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 SOCIAL_AUTH_COMPLETE_URL_NAME = 'socialauth_complete'
 SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+
+# Mailhide
+MAILHIDE_PUBLIC_KEY = os.environ.get('MAILHIDE_PUBLIC_KEY', '')
+MAILHIDE_PRIVATE_KEY = os.environ.get('MAILHIDE_PRIVATE_KEY', '')
