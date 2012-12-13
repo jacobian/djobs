@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if flagged_jobs %}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#flags</th>
+          <th>Job</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for j in flagged_jobs %}
+          <tr>
+            <td>{{ j.flags__count }}</td>
+            <td>
+              <p><a href="{% url "job_detail" j.id %}">{{ j }}</a></p>
+              <p><small>{{ j.description|truncatewords:"50" }}</small></p>
+            </td>
+            <td>
+              <form action="." method="post" class="form-inline">
+                {% csrf_token %}
+                <input type="hidden" name="job_id" value="{{ j.id }}">
+                <div class="btn-group btn-group-vertical">
+                  <button class="btn btn-success" name="action" value="keep">Keep</button>
+                  <button class="btn btn-danger" name="action" value="kill">Kill</button>
+                </div>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <div class="well">
+      <h4>No flags to review - good job!</h4>
+    </div>
+  {% endif %}
+{% endblock content %}

@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.core import urlresolvers
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView
 from django.shortcuts import get_object_or_404, redirect
-from braces.views import LoginRequiredMixin
+from braces.views import LoginRequiredMixin, SuperuserRequiredMixin
 from .models import JobListing
 from .forms import JobListingForm
 
@@ -46,7 +46,8 @@ class JobDetail(JobQuerysetMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         return super(JobDetail, self).get_context_data(
-            user_can_edit = (self.object.creator == self.request.user)
+            user_can_edit = (self.object.creator == self.request.user),
+            has_flagged = 'flagged_%s' % self.object.id in self.request.session
         )
 
 class JobEditMixin(object):
@@ -114,3 +115,58 @@ class ArchiveJob(ChangeJobStatus):
 class Login(TemplateView):
     template_name = "login.html"
     navitem = "login"
+
+class FlagJob(View):
+    """
+    Flag a job as spam.
+
+    Has some basic protection against overposting, but for the most part we'll
+    just assume that people are good citizens and let flags through.
+    """
+
+    def post(self, request, pk):
+        jobs = JobListing.objects.filter(status=JobListing.STATUS_ACTIVE)
+        job = get_object_or_404(jobs, pk=pk)
+
+        # Flag the job, but only if we've not already recorded a flag from this session.
+        if 'flagged_%s' % pk not in request.session:
+            job.flags.create()
+
+        messages.add_message(self.request, messages.SUCCESS,
+            "Thanks for helping to keep our site spam-free! An adminstrator will review this posting shortly.")
+        request.session['flagged_%s' % pk] = True
+
+        return redirect('job_detail', job.id)
+
+class ReviewFlags(LoginRequiredMixin, SuperuserRequiredMixin, TemplateView):
+    """
+    Review and manage flags.
+    """
+
+    template_name = "flags.html"
+    navitem = "flags"
+
+    def get_context_data(self, **kwargs):
+        return super(ReviewFlags, self).get_context_data(
+            flagged_jobs = JobListing.objects.filter(flags__cleared=False).annotate(Count('flags'))
+        )
+
+    def post(self, request):
+        try:
+            job = JobListing.objects.get(id=request.POST['job_id'])
+            action = request.POST['action']
+        except (KeyError, JobListing.DoesNotExist):
+            return redirect('review_flags')
+
+        if action == 'kill':
+            job.status = JobListing.STATUS_REMOVED
+            job.save()
+            job.flags.update(cleared=True)
+            messages.add_message(self.request, messages.SUCCESS, "'%s' removed." % job)
+            # FIXME: ban the user here?
+
+        elif action == 'keep':
+            job.flags.update(cleared=True)
+            messages.add_message(self.request, messages.SUCCESS, "'%s' kept." % job)
+
+        return redirect('review_flags')

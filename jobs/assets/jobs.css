@@ -72,6 +72,18 @@
   height: 34px;
 }
 
+.flag form {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.flag button {
+    opacity: 0.4;
+}
+.flag button:hover {
+    opacity: 1;
+}
+
 /* layout tweaks for smaller screens */
 @media (max-width: 767px) {
     .row-signin {

@@ -28,8 +28,15 @@
           <button class="btn btn-block btn-primary">Re-publish</button>
         </form>
       {% elif job.status == 'removed' %}
-        <p class="text-error">This listing was removed for violating the site's guidlines.</p>
+        <p class="text-error">This listing has been removed for violating the site's guidlines.</p>
       {% endif %}
+    </div>
+  {% elif not has_flagged %}
+    <div class="pull-right flag">
+      <form action="{% url "job_flag" job.id %}" method="post">
+        {% csrf_token %}
+        <button class="btn btn-danger btn-mini flag">Flag as spam</button>
+      </form>
     </div>
   {% endif %}
 

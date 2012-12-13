@@ -29,6 +29,11 @@
           <li {% if view.navitem == 'new' %}class="active"{% endif %}>
             <a href="{% url "job_create" %}">New listing</a>
           </li>
+          {% if user.is_superuser %}
+            <li {% if view.navitem == 'flags' %}class="active"{% endif %}>
+              <a href="{% url "review_flags" %}">Review flags</a>
+            </li>
+          {% endif %}
           <li><a href="{% url "logout" %}">Sign out</a></li>
         {% else %}
           <li {% if view.navitem == 'login' %}class="active"{% endif %}>

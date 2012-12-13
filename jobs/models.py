@@ -50,3 +50,8 @@ class JobListing(models.Model):
 
     def __unicode__(self):
         return self.title
+
+class Flag(models.Model):
+    job = models.ForeignKey(JobListing, related_name='flags')
+    when = models.DateTimeField(default=timezone.now)
+    cleared = models.BooleanField(default=False)
