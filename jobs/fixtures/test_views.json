@@ -1,0 +1,61 @@
+[
+{
+    "pk": 1,
+    "model": "auth.user",
+    "fields": {
+        "username": "apollo13",
+        "first_name": "",
+        "last_name": "",
+        "is_active": true,
+        "is_superuser": false,
+        "is_staff": false,
+        "last_login": "2013-02-08T18:26:06.015Z",
+        "groups": [],
+        "user_permissions": [],
+        "password": "pbkdf2_sha256$10000$1sOJ4xsnxhv9$VniIs+0traBnbicuSVXi+rhU1psF3cs764Kp2IV+cuc=",
+        "email": "apollo13@example.com",
+        "date_joined": "2013-02-08T17:29:07.487Z"
+    }
+},
+{
+    "pk": 1,
+    "model": "jobs.joblisting",
+    "fields": {
+        "status": "active",
+        "employer_website": "",
+        "remote": "maybe",
+        "description": "nothing to see",
+        "title": "super position",
+        "created": "2013-02-08T18:22:48.529Z",
+        "employer_name": "me",
+        "compensation": "near to infinity",
+        "contact_email": "me@example.com",
+        "location": "north pole",
+        "contact_name": "me",
+        "creator": [
+            "apollo13"
+        ]
+    }
+},
+{
+    "pk": 2,
+    "model": "jobs.joblisting",
+    "fields": {
+        "status": "draft",
+        "employer_website": "",
+        "remote": "maybe",
+        "description": "nothing to see",
+        "title": "draft post",
+        "created": "2013-02-08T18:23:48.529Z",
+        "employer_name": "me",
+        "compensation": "near to infinity",
+        "contact_email": "me@example.com",
+        "location": "north pole",
+        "contact_name": "me",
+        "creator": [
+            "apollo13"
+        ]
+    }
+}
+]
+
