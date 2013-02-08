@@ -1,10 +1,10 @@
-from .base import *
+from .base import *  # noqa
 
 DEBUG = TEMPLATE_DEBUG = True
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 try:
-    import debug_toolbar
+    import debug_toolbar  # noqa
 except ImportError:
     pass
 else:
