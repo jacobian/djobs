@@ -1,24 +1,24 @@
-boto==2.6.0
-dj-database-url==0.1.2
-django-braces==0.2.0
+boto==2.8.0
+dj-database-url==0.2.1
+django-braces==0.2.2
 django-forms-bootstrap==2.0.3.post1
-django-heroku-postgresify==0.2
+django-heroku-postgresify==0.3
 django-secure==0.1.2
-django-social-auth==0.7.10
-django-storages==1.1.4
+django-social-auth==0.7.19
+django-storages==1.1.6
 gevent==0.13.8
 greenlet==0.4.0
-gunicorn==0.14.3
+gunicorn==0.17.2
 httplib2==0.7.7
 Markdown==2.2.1
 oauth2==1.5.211
-psycopg2==2.4.5
+psycopg2==2.4.6
 pycrypto==2.6
 python-openid==2.2.5
-pytz==2012h
+pytz==2012j
 South==0.7.6
 Unipath==0.2.1
 recaptcha-client==1.0.6
 
 # Django 1.5 beta
-https://www.djangoproject.com/download/1.5b1/tarball/
+https://www.djangoproject.com/download/1.5c1/tarball/
