@@ -1,6 +1,6 @@
 import os
 import S3
-from .base import *
+from .base import *  # noqa
 
 # AWS creds
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY']

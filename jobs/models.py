@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+
 class JobListing(models.Model):
     creator = models.ForeignKey(User, related_name='job_listings')
     created = models.DateTimeField(default=timezone.now)
@@ -50,6 +51,7 @@ class JobListing(models.Model):
 
     def __unicode__(self):
         return self.title
+
 
 class Flag(models.Model):
     job = models.ForeignKey(JobListing, related_name='flags')
