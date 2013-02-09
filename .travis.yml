@@ -12,5 +12,5 @@ env:
 before_script:
     - psql -c 'create database djobs;' -U postgres
 script:
-    - "coverage run python manage.py test jobs"
-    - "coverae report"
+    - "coverage run manage.py test jobs"
+    - "coverage report"
