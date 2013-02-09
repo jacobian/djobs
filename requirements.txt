@@ -1,6 +1,3 @@
-# Django 1.5 rc - has to be first to override dependencies below.
-https://www.djangoproject.com/download/1.5c1/tarball/
-
 boto==2.8.0
 dj-database-url==0.2.1
 django-braces==0.2.2
@@ -22,3 +19,7 @@ pytz==2012j
 South==0.7.6
 Unipath==0.2.1
 recaptcha-client==1.0.6
+
+# Django 1.5 rr
+# Need "egg=django" to override the django 1.4 install that social-auth tries.
+https://www.djangoproject.com/download/1.5c1/tarball/#egg=django
