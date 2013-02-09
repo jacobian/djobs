@@ -1,14 +1,15 @@
 language: python
 python:
     - "2.7"
+before_install:
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq libevent-dev
 install:
     - "pip install -r requirements.txt"
     - "pip install coverage"
 env:
     - SECRET_KEY=ermahgerd DATABASE_URL=postgres:///djobs
 before_script:
-    - sudo apt-get update -qq
-    - sudo apt-get install -qq libevent-dev
     - psql -c 'create database djobs;' -U postgres
 script:
     - "coverage run python manage.py test jobs"
