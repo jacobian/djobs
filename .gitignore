@@ -16,3 +16,7 @@ build
 
 # Celerybeat scheduler file:
 celerybeat-schedule
+
+# Coverage files
+.coverage
+htmlcov

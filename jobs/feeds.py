@@ -1,7 +1,9 @@
 from django.contrib.syndication.views import Feed
 from django.contrib.markup.templatetags.markup import markdown
 from django.core import urlresolvers
+
 from .models import JobListing
+
 
 class JobFeed(Feed):
     title = "Jobs for Djangonauts"
