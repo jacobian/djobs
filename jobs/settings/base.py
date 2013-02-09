@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django_forms_bootstrap',
+    'taggit',
     'south',
     'social_auth',
     'jobs',
