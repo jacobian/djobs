@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.core import urlresolvers
 from django.db.models import Q, Count
@@ -5,6 +7,8 @@ from django.views.generic import View, TemplateView, ListView, DetailView, Creat
 from django.shortcuts import get_object_or_404, redirect
 
 from braces.views import LoginRequiredMixin, SuperuserRequiredMixin
+
+from taggit.models import Tag
 
 from .models import JobListing
 from .forms import JobListingForm
@@ -68,6 +72,12 @@ class JobEditMixin(object):
     model = JobListing
     form_class = JobListingForm
 
+    def get_context_data(self, **kwargs):
+        context = super(JobEditMixin, self).get_context_data(**kwargs)
+        tags = Tag.objects.all()
+        context['json_tags'] = json.dumps([t.name for t in tags])
+        return context
+
     def form_valid(self, form):
         messages.add_message(self.request, messages.SUCCESS, self.success_message)
         return super(JobEditMixin, self).form_valid(form)
@@ -80,7 +90,7 @@ class JobCreate(LoginRequiredMixin, JobEditMixin, CreateView):
     """
     Create a new job listing.
     """
-    template_name = "jobs/create.html"
+    template_name = "jobs/edit.html"
     success_message = "Your job listing has been saved as a draft."
     navitem = "new"
 

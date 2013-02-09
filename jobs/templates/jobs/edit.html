@@ -1,10 +1,26 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <link href="{% static "select2/select2.css" %}" rel="stylesheet">
+  <script src="{% static "jquery-1.9.1.min.js" %}"></script>
+  <script src="{% static "select2/select2.min.js" %}"></script>
+  <script>
+  $(document).ready(function() {
+    // TODO: Might wanna switch tags to ajax.
+    $('#id_skill_set').select2({tags: {{ json_tags|safe }},
+      tokenSeparators: [","]}
+    );
+  });
+  </script>
+{% endblock extrahead %}
 
 {% block content %}
   {% load bootstrap_tags %}
   <form action="." method="POST" class="form-horizontal">
     {% csrf_token %}
     {{ form|as_bootstrap }}
-    <input type="submit" class="btn btn-primary pull-right" value="Save">
+    <input type="submit" class="btn btn-primary pull-right" value="Save {% if not form.instance.pk %}&amp; preview {% endif %}">
   </form>
 {% endblock %}

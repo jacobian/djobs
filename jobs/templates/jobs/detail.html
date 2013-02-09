@@ -42,7 +42,13 @@
 
   {% include "jobs/snippets/title.html" %}
   {{ job.description|markdown:"safe" }}
-
+  <p>Expected skills:
+    <ul>
+      {% for skill in job.skill_set.all %}
+        <li>{{ skill }}</li>
+      {% endfor %}
+    </ul>
+  </p>
   <p>Contact: <a href="{{ job.contact_email|mailhide }}" onclick="window.open('{{ job.contact_email|mailhide }}', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;" title="Reveal this e-mail address">{{ job.contact_name }}</a></p>
   <p>Location: {{ job.location }} ({{ job.remote|yesno:"remote OK,on-site only" }})</p>
   {% if job.compensation %}<p>Compensation: {{ job.compensation }}</p>{% endif %}

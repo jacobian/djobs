@@ -1,15 +1,20 @@
 from django import forms
+
+from taggit.forms import TagWidget
+
 from .models import JobListing
 
 
 class JobListingForm(forms.ModelForm):
     class Meta(object):
         model = JobListing
-        fields = ['title', 'description', 'compensation', 'location', 'remote',
-                  'employer_name', 'employer_website', 'contact_name', 'contact_email']
+        fields = ['title', 'description', 'skill_set', 'compensation',
+                  'location', 'remote', 'employer_name', 'employer_website',
+                  'contact_name', 'contact_email']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'input-block-level'}),
             'description': forms.Textarea(attrs={'class': 'input-block-level'}),
+            'skill_set': TagWidget(attrs={'class': 'input-block-level'}),
             'compensation': forms.TextInput(attrs={'class': 'input-block-level'}),
             'location': forms.TextInput(attrs={'class': 'input-block-level'}),
             'employer_name': forms.TextInput(attrs={'class': 'input-block-level'}),
