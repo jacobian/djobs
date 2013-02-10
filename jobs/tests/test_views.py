@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
-from django.test.utils import override_settings
 
 from ..models import JobListing, Flag
 from ..views import PublishJob, ArchiveJob
@@ -10,7 +9,7 @@ class EditJobTestCase(TestCase):
     fixtures = ['test_views.json']
 
     data = {'title': 'testjob', 'description': 'description',
-        'skill_set': 'python, postgres', 'location': 'here',
+        'skills': 'python, postgres', 'location': 'here',
         'employer_name': 'me', 'contact_name': 'me',
         'contact_email': '123@example.com', 'remote': 'yes'
     }

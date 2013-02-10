@@ -44,7 +44,7 @@
   {{ job.description|markdown:"safe" }}
   <p>Expected skills:
     <ul>
-      {% for skill in job.skill_set.all %}
+      {% for skill in job.skills.all %}
         <li>{{ skill }}</li>
       {% endfor %}
     </ul>

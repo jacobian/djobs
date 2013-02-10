@@ -9,7 +9,7 @@
   <script>
   $(document).ready(function() {
     // TODO: Might wanna switch tags to ajax.
-    $('#id_skill_set').select2({tags: {{ json_tags|safe }},
+    $('#id_skills').select2({tags: {{ json_tags|safe }},
       tokenSeparators: [","]}
     );
   });
