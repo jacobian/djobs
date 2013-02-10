@@ -38,6 +38,26 @@
     border-top: 1px #ccc solid;
 }
 
+.job-meta {
+    clear: right;
+}
+
+.job-meta dl {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.job-meta dl dt {
+    text-align: left;
+    width: 110px;
+    padding: 4px 0;
+}
+
+.job-meta dl dd {
+    margin-left: 110px;
+    padding: 3px 0 5px 0;
+}
+
 .action-well {
     width: 200px;
     margin: 0 0 20px 20px;
