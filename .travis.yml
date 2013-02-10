@@ -6,11 +6,11 @@ before_install:
     - sudo apt-get install -qq libevent-dev
 install:
     - "pip install -r requirements.txt"
-    - "pip install coverage"
+    - "pip install -r test-requirements.txt"
 env:
     - SECRET_KEY=ermahgerd DATABASE_URL=postgres:///djobs
 before_script:
     - psql -c 'create database djobs;' -U postgres
 script:
-    - "coverage run manage.py test jobs"
+    - "coverage run manage.py test"
     - "coverage report"

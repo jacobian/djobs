@@ -56,25 +56,6 @@ INSTALLED_APPS = [
     'jobs',
 ]
 
-# Logging
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'ERROR',
-            'propagate': True,
-        },
-    }
-}
-
 # Auth stuff
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
@@ -106,3 +87,25 @@ SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
 # Mailhide
 MAILHIDE_PUBLIC_KEY = os.environ.get('MAILHIDE_PUBLIC_KEY', '')
 MAILHIDE_PRIVATE_KEY = os.environ.get('MAILHIDE_PRIVATE_KEY', '')
+
+# Testing
+TEST_RUNNER = 'discover_runner.DiscoverRunner'
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
