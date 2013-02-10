@@ -19,6 +19,7 @@ pytz==2012j
 South==0.7.6
 Unipath==0.2.1
 recaptcha-client==1.0.6
+django-taggit==0.9.3
 
 # Django 1.5 rr
 # Need "egg=django" to override the django 1.4 install that social-auth tries.
