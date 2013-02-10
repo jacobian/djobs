@@ -1,5 +1,4 @@
 import os
-import S3
 from .base import *  # noqa
 
 # AWS creds
@@ -10,7 +9,6 @@ AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 # S3 storage
 INSTALLED_APPS.append('storages')
 STATICFILES_STORAGE = DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-AWS_CALLING_FORMAT = S3.CallingFormat.SUBDOMAIN
 AWS_AUTO_CREATE_BUCKET = True
 AWS_QUERYSTRING_AUTH = False
 AWS_EXPIREY = 60 * 60 * 24 * 7
