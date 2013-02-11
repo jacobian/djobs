@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from ..models import JobListing, Flag
-from ..views import PublishJob, ArchiveJob
+from jobs.models import JobListing, Flag
+from jobs.views import PublishJob, ArchiveJob
 
 
 class EditJobTestCase(TestCase):
