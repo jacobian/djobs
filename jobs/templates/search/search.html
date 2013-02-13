@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap_tags %}
+{% load url from future %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <script src="{% static "jquery-1.9.1.min.js" %}"></script>
+  <script>
+    $(document).ready(function() {
+      var search_form_submitted = false;
+      $('#form-search').submit(function() {
+        var self = $(this);
+        if (search_form_submitted ||
+            self.find('input#id_longitude').val() ||
+            !self.find('select#id_distance').val()) { return true; }
+        navigator.geolocation.getCurrentPosition(function(data) {
+          search_form_submitted = true;
+          self.find('input#id_longitude').val(data.coords.longitude);
+          self.find('input#id_latitude').val(data.coords.latitude);
+          self.submit();
+        },
+        function(err) {
+          alert(err);
+        });
+        return false;
+      });
+    });
+  </script>
+{% endblock extrahead %}
+
+{% block content %}
+<form method="get" action="" class="form-search" id="form-search">
+  {{ form.query }}
+  <hr>
+  <label>Limit to jobs near me: </label>
+  {{ form.distance }}
+  {{ form.longitude }}{{ form.latitude }}
+</form>
+
+{% if search %}
+  {% url 'job_search' as search_url %}
+  {% include 'jobs/snippets/pagination.html' with page=page_obj url=search_url only %}
+  {% for result in page_obj.object_list %}
+    {% with result.object as job %}
+      <div class="job">
+        {% include "jobs/snippets/title.html" %}
+        <p>{{ job.description|truncatewords:"100" }}</p>
+      </div>
+    {% endwith %}
+  {% empty %}
+  <div class="well">
+    <h4>No results found or an invalid query was entered.</h4>
+  </div>
+  {% endfor %}
+  {% include 'jobs/snippets/pagination.html' with page=page_obj url=search_url only %}
+{% else %}
+  <div class="well">
+    <h4>Search and you shall find!</h4>
+    Type "backend AND skill:postgres" as an example.
+  </div>
+{% endif %}
+
+{% endblock %}
