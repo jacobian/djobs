@@ -9,7 +9,8 @@ class JobListingForm(forms.ModelForm):
     class Meta(object):
         model = JobListing
         fields = ['title', 'description', 'skills', 'compensation',
-                  'location', 'remote', 'employer_name', 'employer_website',
+                  'location', 'location_latitude', 'location_longitude',
+                  'remote', 'employer_name', 'employer_website',
                   'contact_name', 'contact_email']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'input-block-level'}),
@@ -17,6 +18,8 @@ class JobListingForm(forms.ModelForm):
             'skills': TagWidget(attrs={'class': 'input-block-level'}),
             'compensation': forms.TextInput(attrs={'class': 'input-block-level'}),
             'location': forms.TextInput(attrs={'class': 'input-block-level'}),
+            'location_latitude': forms.HiddenInput(),
+            'location_longitude': forms.HiddenInput(),
             'employer_name': forms.TextInput(attrs={'class': 'input-block-level'}),
             'employer_website': forms.TextInput(attrs={'class': 'input-block-level'}),
             'contact_name': forms.TextInput(attrs={'class': 'input-block-level'}),

@@ -6,12 +6,48 @@
   <link href="{% static "select2/select2.css" %}" rel="stylesheet">
   <script src="{% static "jquery-1.9.1.min.js" %}"></script>
   <script src="{% static "select2/select2.min.js" %}"></script>
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
   <script>
   $(document).ready(function() {
+    var location_service = new google.maps.places.AutocompleteService();
+    var geocode_service = new google.maps.Geocoder();
     // TODO: Might wanna switch tags to ajax.
-    $('#id_skills').select2({tags: {{ json_tags|safe }},
-      tokenSeparators: [","]}
-    );
+    $('#id_skills').select2({
+      tags: {{ json_tags|safe }},
+      tokenSeparators: [","]
+    });
+    $('#id_location').select2({
+      minimumInputLength: 3,
+      query: function(options) {
+        location_service.getPlacePredictions({input: options.term, options: {types: ['geocode']}}, function(predictions, status) {
+          var results = {more: false};
+          if (status != google.maps.places.PlacesServiceStatus.OK) {
+            results.results = [];
+          } else {
+            results.results = predictions;
+            results.results = $.map(predictions, function(obj) {
+              return {'id': obj.description, 'text': obj.description, gid: obj.id};
+            });
+          }
+          options.callback(results);
+        });
+      },
+      initSelection: function(element, callback) {
+        var val = $(element).val();
+        if (val) {
+          callback({id: val, text:val});
+        }
+      }
+    }).change(function(val) {
+      geocode_service.geocode({address: val.val}, function(results, status) {
+        console.debug(results);
+        if (status == google.maps.GeocoderStatus.OK) {
+          var result = results[0].geometry.location;
+          $('#id_location_longitude').val(result.lng().toFixed(6));
+          $('#id_location_latitude').val(result.lat().toFixed(6));
+        }
+      });
+    });
   });
   </script>
 {% endblock extrahead %}

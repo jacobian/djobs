@@ -14,6 +14,10 @@ class JobListing(models.Model):
     description = models.TextField(help_text='Full job description. Markdown is allowed.')
     compensation = models.CharField(max_length=500, blank=True, help_text='Salary/compensation range (optional)')
     location = models.CharField(max_length=500, help_text='Where is the job located?')
+    location_latitude = models.DecimalField(max_digits=9, decimal_places=6,
+        null=True, blank=True)
+    location_longitude = models.DecimalField(max_digits=9, decimal_places=6,
+        null=True, blank=True)
     skills = TaggableManager('Skills', help_text='Desired skills (used for filtering). Separate multiple skills with commas.')
 
     # Is remote work allowd?
