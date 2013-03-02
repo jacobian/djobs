@@ -7,7 +7,7 @@ class JobIndex(indexes.SearchIndex, indexes.Indexable):
     # elasticsearch do the right thing :)
     _all = indexes.CharField(document=True, indexed=False, stored=False)
 
-    title = indexes.CharField(model_attr='title', stored=False)
+    title = indexes.CharField(model_attr='title', boost=1.125, stored=False)
     description = indexes.CharField(model_attr='description', stored=False)
 
     location = indexes.CharField(model_attr='location', stored=False)
