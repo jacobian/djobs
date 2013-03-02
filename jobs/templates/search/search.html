@@ -30,6 +30,7 @@
 {% endblock extrahead %}
 
 {% block content %}
+{{ form.non_field_errors }}
 <form method="get" action="" class="form-search" id="form-search">
   {{ form.query }}
   <hr>
@@ -38,7 +39,7 @@
   {{ form.longitude }}{{ form.latitude }}
 </form>
 
-{% if search %}
+{% if search and not form.errors %}
   {% url 'job_search' as search_url %}
   {% include 'jobs/snippets/pagination.html' with page=page_obj url=search_url only %}
   {% for result in page_obj.object_list %}

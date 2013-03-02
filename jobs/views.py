@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, redirect
 
 from braces.views import LoginRequiredMixin, SuperuserRequiredMixin
 from haystack.inputs import Raw
-from haystack.query import SearchQuerySet
+from haystack.query import SearchQuerySet, EmptySearchQuerySet
 from haystack.utils.geo import Point, D
 from taggit.models import Tag
 
@@ -223,7 +223,7 @@ class SearchView(ListView):
                     .distance('location_coordinates', point) \
                     .order_by('distance')
         else:
-            print self.form.errors
+            sqs = EmptySearchQuerySet()
         if self.load_all:
             sqs = sqs.load_all()
         return sqs
