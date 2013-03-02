@@ -41,7 +41,7 @@
 
 {% if search and not form.errors %}
   {% url 'job_search' as search_url %}
-  {% include 'jobs/snippets/pagination.html' with page=page_obj url=search_url only %}
+  {% include 'jobs/snippets/pagination.html' with page=page_obj url=search_url query_args=query_args only %}
   {% for result in page_obj.object_list %}
     {% with result.object as job %}
       <div class="job">
@@ -54,7 +54,7 @@
     <h4>No results found or an invalid query was entered.</h4>
   </div>
   {% endfor %}
-  {% include 'jobs/snippets/pagination.html' with page=page_obj url=search_url only %}
+  {% include 'jobs/snippets/pagination.html' with page=page_obj url=search_url query_args=query_args only %}
 {% else %}
   <div class="well">
     <h4>Search and you shall find!</h4>

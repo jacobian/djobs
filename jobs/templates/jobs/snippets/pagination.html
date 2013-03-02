@@ -1,11 +1,11 @@
 <ul class="pager">
   <li class="previous{% if not page.has_previous %} disabled{% endif %}">
-    <a href="{% if page.has_previous %}{{ url }}?page={{ page.previous_page_number }}{% else %}#{% endif %}">
+    <a href="{% if page.has_previous %}{{ url }}?{{ query_args.urlencode }}{% if query_args %}&{% endif%}page={{ page.previous_page_number }}{% else %}#{% endif %}">
       &larr; Previous
     </a>
   </li>
   <li class="next{% if not page.has_next %} disabled{% endif %}">
-    <a href="{% if page.has_next %}{{ url }}?page={{ page.next_page_number }}{% else %}#{% endif %}">
+    <a href="{% if page.has_next %}{{ url }}?{{ query_args.urlencode }}{% if query_args %}&{% endif%}page={{ page.next_page_number }}{% else %}#{% endif %}">
       Next &rarr;
     </a>
   </li>

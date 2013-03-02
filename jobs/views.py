@@ -230,8 +230,11 @@ class SearchView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
+        query_args = self.request.GET.copy()
+        query_args.pop('page', None)
         context.update({
             'form': self.form,
-            'search': 'query' in self.request.GET
+            'search': 'query' in self.request.GET,
+            'query_args': query_args,
         })
         return context
