@@ -4,12 +4,16 @@ from .models import JobListing
 
 class JobIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
+
     title = indexes.CharField()
     description = indexes.CharField()
-    created = indexes.DateTimeField()
+
     location = indexes.CharField()
     location_coordinates = indexes.LocationField()
     skill = indexes.MultiValueField()
+
+    def get_updated_field(self):
+        return 'updated'
 
     def prepare_location_coordinates(self, obj):
         if obj.location_latitude and obj.location_longitude:

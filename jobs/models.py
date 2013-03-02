@@ -8,6 +8,7 @@ from taggit.managers import TaggableManager
 class JobListing(models.Model):
     creator = models.ForeignKey(User, related_name='job_listings')
     created = models.DateTimeField(default=timezone.now)
+    updated = models.DateTimeField(auto_now=True)
 
     # Job info
     title = models.CharField(max_length=500, help_text='Title of the job - e.g. "Intern", "Software Developer", "CTO", etc.')
