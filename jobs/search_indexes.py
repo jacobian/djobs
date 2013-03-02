@@ -3,14 +3,16 @@ from .models import JobListing
 
 
 class JobIndex(indexes.SearchIndex, indexes.Indexable):
-    text = indexes.CharField(document=True, use_template=True)
+    # Ugly trick to ignore the document=True requirement by haystack, just let
+    # elasticsearch do the right thing :)
+    _all = indexes.CharField(document=True, indexed=False, stored=False)
 
-    title = indexes.CharField()
-    description = indexes.CharField()
+    title = indexes.CharField(model_attr='title', stored=False)
+    description = indexes.CharField(model_attr='description', stored=False)
 
-    location = indexes.CharField()
-    location_coordinates = indexes.LocationField()
-    skill = indexes.MultiValueField()
+    location = indexes.CharField(model_attr='location', stored=False)
+    location_coordinates = indexes.LocationField(stored=False)
+    skill = indexes.MultiValueField(stored=False)
 
     def get_updated_field(self):
         return 'updated'

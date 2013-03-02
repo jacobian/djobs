@@ -1,7 +1,0 @@
-{{ object.title }}
-
-{{ object.description }}
-
-{% for skill in object.skills.all %}
-{{ skill }}
-{% endfor %}

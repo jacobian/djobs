@@ -122,3 +122,4 @@ HAYSTACK_CONNECTIONS = {
         'INDEX_NAME': 'jobs',
     },
 }
+HAYSTACK_DOCUMENT_FIELD = '_all'
