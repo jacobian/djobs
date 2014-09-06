@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django_forms_bootstrap',
+    'haystack',
     'taggit',
     'south',
     'social_auth',
@@ -107,5 +108,18 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'requests': {
+            'handlers': ['console'],
+            'level': 'DEBUG'
+        }
     }
 }
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'jobs',
+    },
+}
+HAYSTACK_DOCUMENT_FIELD = '_all'

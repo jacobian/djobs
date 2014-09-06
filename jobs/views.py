@@ -7,11 +7,13 @@ from django.views.generic import View, TemplateView, ListView, DetailView, Creat
 from django.shortcuts import get_object_or_404, redirect
 
 from braces.views import LoginRequiredMixin, SuperuserRequiredMixin
-
+from haystack.inputs import Raw
+from haystack.query import SearchQuerySet, EmptySearchQuerySet
+from haystack.utils.geo import Point, D
 from taggit.models import Tag
 
 from .models import JobListing
-from .forms import JobListingForm
+from .forms import JobListingForm, SearchForm
 
 
 class JobQuerysetMixin(object):
@@ -195,3 +197,44 @@ class ReviewFlags(LoginRequiredMixin, SuperuserRequiredMixin, TemplateView):
             messages.add_message(self.request, messages.SUCCESS, "'%s' kept." % job)
 
         return redirect('review_flags')
+
+
+class SearchView(ListView):
+    template_name = "search/search.html"
+    navitem = "search"
+    paginate_by = 10
+    load_all = True
+
+    def get(self, request, *args, **kwargs):
+        self.form = SearchForm(self.request.GET or None)
+        return super(SearchView, self).get(request, *args, **kwargs)
+
+    def get_queryset(self):
+        sqs = SearchQuerySet()
+        if 'query' in self.request.GET and self.form.is_valid():
+            cleaned_data = self.form.cleaned_data
+            if cleaned_data['query']:
+                sqs = sqs.filter(content=Raw(cleaned_data['query']))
+            if cleaned_data['distance']:
+                distance = D(km=int(cleaned_data['distance']))
+                point = Point(cleaned_data['longitude'], cleaned_data['latitude'])
+                sqs = sqs \
+                    .dwithin('location_coordinates', point, distance) \
+                    .distance('location_coordinates', point) \
+                    .order_by('distance')
+        else:
+            sqs = EmptySearchQuerySet()
+        if self.load_all:
+            sqs = sqs.load_all()
+        return sqs
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        query_args = self.request.GET.copy()
+        query_args.pop('page', None)
+        context.update({
+            'form': self.form,
+            'search': 'query' in self.request.GET,
+            'query_args': query_args,
+        })
+        return context

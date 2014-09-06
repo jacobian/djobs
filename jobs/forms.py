@@ -25,3 +25,18 @@ class JobListingForm(forms.ModelForm):
             'contact_name': forms.TextInput(attrs={'class': 'input-block-level'}),
             'contact_email': forms.TextInput(attrs={'class': 'input-block-level'}),
         }
+
+
+class SearchForm(forms.Form):
+    DISTANCES = (
+        ('', '-----------'),
+        ('50', '50 km'),
+        ('100', '100 km'),
+        ('1000', '1000 km'),
+    )
+    query = forms.CharField(widget=forms.TextInput(attrs={
+                'class': 'search-query input-block-level',
+                'placeholder': 'Search'}), required=False)
+    distance = forms.ChoiceField(choices=DISTANCES, required=False)
+    longitude = forms.FloatField(widget=forms.HiddenInput, required=False)
+    latitude = forms.FloatField(widget=forms.HiddenInput, required=False)
